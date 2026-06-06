@@ -1,0 +1,83 @@
+<div class="chatbot-container" [class.open]="isOpen">
+  <!-- Pulsing Toggle Button -->
+  <button class="chat-toggle" (click)="toggleChat()">
+    <div class="icon-wrapper" [class.active]="isOpen">
+      <span class="chat-icon" *ngIf="!isOpen">💬</span>
+      <span class="close-icon" *ngIf="isOpen">✕</span>
+    </div>
+    <span class="pulse"></span>
+  </button>
+
+  <!-- Chat Window -->
+  <div class="chat-window glass-card" *ngIf="isOpen" [class.maximized]="isMaximized">
+    <!-- Header -->
+    <div class="chat-header gradient-bg">
+      <div class="bot-info">
+        <div class="bot-avatar glass">CL</div>
+        <div>
+          <h3>Choeun Lyhuoy</h3>
+          <p class="status"><span class="online-dot"></span> Online IQ</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="action-btn" (click)="clearChat()" title="Clear History">
+          <span>🧹</span>
+        </button>
+        <button class="action-btn" (click)="toggleMaximize()" [title]="isMaximized ? 'Minimize' : 'Expand to Page'">
+          <span *ngIf="!isMaximized">📂</span>
+          <span *ngIf="isMaximized">📁</span>
+        </button>
+        <button class="action-btn close" (click)="toggleChat()">
+          <span>✕</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Messages Area -->
+    <div class="chat-body" #scrollMe>
+      <div class="message-group" *ngFor="let msg of messages" [class.user]="msg.isUser">
+        <div class="avatar-sm" *ngIf="!msg.isUser">CL</div>
+        <div class="bubble-container">
+          <div class="message-bubble" [innerHTML]="msg.text"></div>
+          <span class="time">{{ msg.timestamp | date:'shortTime' }}</span>
+        </div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div class="message-group" *ngIf="isTyping">
+        <div class="avatar-sm">CL</div>
+        <div class="message-bubble typing">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suggestions Area -->
+    <div class="chat-footer">
+      <div class="suggestions-container" *ngIf="suggestions.length > 0">
+        <div class="suggestions-header">Quick Actions</div>
+        <div class="suggestions-grid">
+          <button 
+            class="suggestion-chip" 
+            *ngFor="let s of suggestions" 
+            (click)="handleSuggestion(s)">
+            {{ s.text }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Message Input -->
+      <div class="input-area">
+        <input 
+          #chatInput
+          type="text" 
+          placeholder="Type a message..." 
+          (keyup.enter)="handleManualInput(chatInput)"
+          class="chat-input-field">
+        <button class="send-btn" (click)="handleManualInput(chatInput)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

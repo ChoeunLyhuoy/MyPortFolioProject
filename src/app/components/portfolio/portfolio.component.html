@@ -1,0 +1,80 @@
+<section id="portfolio" class="section portfolio-section">
+  <div class="container">
+
+    <div class="portfolio-header reveal">
+      <p class="section-label" style="justify-content:center">Our Work, Your Future</p>
+      <h2 class="section-title" style="text-align:center">Featured <span>Case Studies</span></h2>
+      <p class="section-sub" style="text-align:center; margin-left: auto; margin-right: auto;">Our ultimate set of
+        projects highlighting full-stack and mobile expertise.</p>
+    </div>
+
+    <!-- Controls Header -->
+    <div class="portfolio-controls reveal">
+      <!-- Filter Tabs -->
+      <div class="portfolio-tabs" #scrollContainer (mousedown)="onMouseDown($event)" (mouseleave)="onMouseLeave()"
+        (mouseup)="onMouseUp()" (mousemove)="onMouseMove($event)" (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd()">
+        <button class="tab-btn" [class.active]="activeFilter() === tab.key" *ngFor="let tab of tabs"
+          (click)="setFilter(tab.key)">
+          {{ tab.label }}
+        </button>
+      </div>
+
+      <!-- View Toggles -->
+      <div class="view-toggles">
+        <button class="view-btn" [class.active]="viewMode() === 'grid'" (click)="viewMode.set('grid')"
+          title="Grid View">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+        </button>
+        <button class="view-btn" [class.active]="viewMode() === 'list'" (click)="viewMode.set('list')"
+          title="List View">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Project Grid/List -->
+    <div class="reveal" [ngClass]="viewMode() === 'grid' ? 'portfolio-grid' : 'portfolio-list'">
+      <div class="portfolio-card fade-in" 
+           [ngClass]="cardStyle() + '-card'" 
+           *ngFor="let p of filtered()" 
+           (click)="openProject(p)"
+           (mouseenter)="onCardMouseEnter($event)"
+           (mousemove)="onCardMouseMove($event)"
+           (mouseleave)="onCardMouseLeave($event)">
+        <div class="portfolio-thumb">
+          <img [src]="p.icon" [alt]="p.name" class="thumb-img" [class.grayscale]="imageFilter() === 'grayscale'" loading="lazy">
+          <div class="portfolio-overlay">
+            <span class="overlay-text">Explore Details →</span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-top">
+            <p class="portfolio-tag">{{ p.tag }}</p>
+            <div class="portfolio-action-icon">↗</div>
+          </div>
+          <h3 class="portfolio-name">{{ p.name }}</h3>
+          <p class="portfolio-desc">{{ p.desc }}</p>
+          <div class="portfolio-footer-action">
+            <span class="btn-text">View Project Details →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

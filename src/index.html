@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LyhuoyDev — Transforming Ideas into Code</title>
+  <base href="/portfolio/choeunlyhuoy/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio of Choeun Lyhuoy – Front-end & Back-end Developer">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+  <!-- Splash Screen / Loader -->
+  <div id="loader" style="position: fixed; inset: 0; background: #0b0f19; display: flex; align-items: center; justify-content: center; z-index: 99999; transition: opacity 0.8s ease-out;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+      <svg width="80" height="80" viewBox="0 0 100 100" fill="none" style="animation: pulse 2s infinite ease-in-out;">
+        <circle cx="50" cy="50" r="48" stroke="#3b82f6" stroke-width="4" />
+        <path d="M35 40L25 50L35 60" stroke="#06b6d4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M65 40L75 50L65 60" stroke="#06b6d4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M55 35L45 65" stroke="#3b82f6" stroke-width="5" stroke-linecap="round" />
+      </svg>
+      <div style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; color: #fff; letter-spacing: -0.02em;">
+        Lyhuoy<span style="color: #3b82f6;">Dev</span>
+      </div>
+    </div>
+  </div>
+  <style>
+    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
+  </style>
+  <script>
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 400); // 400ms is enough
+      }
+    });
+  </script>
+
+  <app-root></app-root>
+</body>
+</html>

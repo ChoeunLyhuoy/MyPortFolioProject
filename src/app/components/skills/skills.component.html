@@ -1,0 +1,87 @@
+<section id="skills" class="section skill-tree-section">
+  <div class="container">
+    <div class="portfolio-header reveal">
+      <p class="section-label" style="justify-content:center">Level Up</p>
+      <h2 class="section-title" style="text-align:center">Skill <span>Tree</span></h2>
+      <p class="section-sub" style="text-align:center; margin: 0 auto;">Allocate skill points to upgrade technical capabilities.</p>
+    </div>
+
+    <div class="tree-ui reveal glass-card">
+      
+      <!-- Top Bar -->
+      <div class="tree-top-bar">
+        <label class="toggle-switch">
+          <input type="checkbox" [checked]="recommendedPath()" (change)="toggleRecommended()">
+          <span class="slider"></span>
+          <span class="label-text">Recommended Path</span>
+        </label>
+        
+        <div class="player-stats">
+          <button class="icon-btn" (click)="resetSkills()" title="Reset Skills">🔄</button>
+          <button class="icon-btn" (click)="maxOutSkills()" title="Max Out Skills">✨</button>
+          <div class="stat-badge rank"><span class="icon">💎</span> MASTER LVL.{{level()}}</div>
+          <div class="stat-badge coins"><span class="icon">🟡</span> {{coins()}} Coins</div>
+          <div class="avatar-mini"><img src="assets/profile.jpg" onerror="this.src='https://ui-avatars.com/api/?name=CL&background=random'" alt="User" loading="lazy"></div>
+        </div>
+      </div>
+
+      <!-- Canvas -->
+      <div class="tree-canvas" [class.show-path]="recommendedPath()">
+        
+        <div class="skill-categories">
+          <div class="category-branch" *ngFor="let cat of categories; let cIndex = index">
+            <div class="cat-hub" [style.--cat-color]="cat.color">
+              <img [src]="cat.icon" alt="Category Icon" class="cat-icon" loading="lazy"> {{cat.title}}
+            </div>
+
+            <div class="nodes-container">
+              <ng-container *ngFor="let row of cat.nodes; let rIndex = index; let last = last">
+                <div class="node-row" [class.row-active]="isRowActive(row)">
+                  <div class="skill-node" *ngFor="let skill of row; let sIndex = index" 
+                       [class.locked]="skill.status === 'locked'"
+                       [class.mastered]="skill.status === 'mastered'"
+                       [class.shake]="skill.isShaking"
+                       [class.upgrade-flash]="skill.isUpgrading"
+                       [class.just-unlocked]="skill.justUnlocked"
+                       [style.--node-color]="cat.color"
+                       (click)="upgradeSkill(skill, cIndex, rIndex, sIndex)">
+                    <div class="node-circle">
+                      <img [src]="skill.icon" [alt]="skill.name" class="skill-svg" loading="lazy">
+                      <div class="status-badge" *ngIf="skill.status === 'mastered'">✓</div>
+                      <div class="status-badge lock" *ngIf="skill.status === 'locked'">🔒</div>
+                      <div class="floating-text" *ngIf="skill.isUpgrading">Level Up!</div>
+                    </div>
+                    <div class="node-info">
+                      <span class="name">{{skill.name}}</span>
+                    </div>
+
+                    <!-- Tooltip -->
+                    <div class="node-tooltip">
+                      <h5>{{skill.name}}</h5>
+                      <p>{{skill.desc}}</p>
+                      <div class="tooltip-meta">
+                        <span class="lvl-badge">Lv. {{skill.level}}/{{skill.maxLevel}}</span>
+                        <span class="cost-badge" *ngIf="skill.status !== 'mastered'">Cost: {{skill.cost}} 🪙</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Player Node -->
+        <div class="player-hub">
+          <div class="player-card">
+            <img src="assets/profile.jpg" onerror="this.src='https://ui-avatars.com/api/?name=CL&background=3b82f6&color=fff'" alt="Player" class="player-img" loading="lazy">
+            <h4>Choeun Lyhuoy</h4>
+            <p>Full Stack Dev<br>climbing towards Senior</p>
+            <div class="xp-bar"><div class="xp-fill"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

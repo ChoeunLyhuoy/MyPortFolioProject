@@ -1,0 +1,12 @@
+<div class="brands">
+  <div class="track">
+    <div class="brand-item" *ngFor="let b of brands">
+      <img [src]="b.img" [alt]="b.name" [class.invert-me]="b.invert" loading="lazy">
+      <span>{{ b.name }}</span>
+    </div>
+    <div class="brand-item" *ngFor="let b of brands">
+      <img [src]="b.img" [alt]="b.name" [class.invert-me]="b.invert" loading="lazy">
+      <span>{{ b.name }}</span>
+    </div>
+  </div>
+</div>

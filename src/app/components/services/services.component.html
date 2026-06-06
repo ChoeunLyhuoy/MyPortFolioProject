@@ -1,0 +1,60 @@
+<section id="services" class="section services-section">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="services-header">
+      <div>
+        <p class="section-label">What We Offer</p>
+        <h2 class="section-title">Our Comprehensive <span>Digital Solutions</span></h2>
+      </div>
+      <p class="section-sub">Our ultimate set of services for your ideas implementation — from concept to production-ready deployment.</p>
+    </div>
+
+    <!-- Service Cards -->
+    <div class="services-grid">
+      <div class="service-card glass-card reveal" *ngFor="let s of services">
+        <div class="service-icon">{{ s.icon }}</div>
+        <h3 class="service-title">{{ s.title }}</h3>
+        <p class="service-desc">{{ s.desc }}</p>
+        <a class="service-link" (click)="scrollTo('contact')">Learn more →</a>
+      </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="why-section">
+      <div class="why-card glass-card reveal" *ngFor="let w of whyUs">
+        <div class="why-icon">{{ w.icon }}</div>
+        <h4 class="why-title">{{ w.title }}</h4>
+        <p class="why-desc">{{ w.desc }}</p>
+      </div>
+    </div>
+
+    <!-- Industries -->
+    <div class="industries">
+      <h3 class="industries-title">Industries We Serve</h3>
+      <div class="industries-grid">
+        <div class="industry-card reveal" *ngFor="let ind of industries">
+          <span class="ind-icon">{{ ind.icon }}</span>
+          <span class="ind-label">{{ ind.label }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h3 class="faq-main-title">Frequently Asked Questions</h3>
+      <div class="faq-list">
+        <div class="faq-item" [class.open]="faq.open" *ngFor="let faq of faqs">
+          <div class="faq-q" (click)="toggleFaq(faq)">
+            <span>{{ faq.q }}</span>
+            <div class="faq-arrow">▼</div>
+          </div>
+          <div class="faq-a">
+            <p>{{ faq.a }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

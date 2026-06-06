@@ -1,0 +1,72 @@
+<section id="contact" class="section contact-section">
+  <div class="glow-circle contact-glow"></div>
+  <div class="container">
+
+    <div class="contact-grid">
+
+      <!-- Info Side -->
+      <div class="contact-info reveal">
+        <p class="section-label">Get In Touch</p>
+        <h2 class="contact-title">Contact <span>Us</span></h2>
+        <p class="contact-subtitle">Have a project in mind? We'd love to hear from you. Send us a message and we'll respond within 24 hours.</p>
+
+        <div class="contact-items">
+          <div class="contact-item" *ngFor="let item of contactItems">
+            <div class="contact-ico">{{ item.icon }}</div>
+            <div>
+              <div class="item-title">{{ item.title }}</div>
+              <div class="item-val">{{ item.value }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a class="social-btn" *ngFor="let s of socials" [title]="s.label" [href]="s.url" target="_blank">
+            <img [src]="s.icon" [alt]="s.label" style="width: 24px; height: 24px; object-fit: contain;" loading="lazy">
+          </a>
+        </div>
+      </div>
+
+      <!-- Form Side -->
+      <div class="contact-form-wrap glass-card reveal">
+        <h3 class="form-title">Send a Message</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input class="form-input" type="text" placeholder="Alex" [(ngModel)]="form.firstName" name="firstName" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input class="form-input" type="text" placeholder="Rivera" [(ngModel)]="form.lastName" name="lastName" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" placeholder="alex@company.com" [(ngModel)]="form.email" name="email" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Service Interested In</label>
+          <select class="form-select" [(ngModel)]="form.service" name="service">
+            <option value="">Select a service…</option>
+            <option *ngFor="let s of services" [value]="s">{{ s }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell us about your project…" [(ngModel)]="form.message" name="message"></textarea>
+        </div>
+
+        <button class="form-submit btn btn-primary" (click)="submit()" [disabled]="sending || sent">
+          <span *ngIf="!sending && !sent">Send Message →</span>
+          <span *ngIf="sending">Sending…</span>
+          <span *ngIf="sent" class="sent-msg">✓ Message Sent!</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>

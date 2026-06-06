@@ -1,0 +1,63 @@
+<footer>
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg class="logo-ico" width="40" height="40" viewBox="0 0 100 100" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="48" class="logo-circle" stroke="var(--blue)" stroke-width="4" />
+            <path d="M35 40L25 50L35 60" stroke="var(--cyan)" stroke-width="4" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M65 40L75 50L65 60" stroke="var(--cyan)" stroke-width="4" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M55 35L45 65" stroke="var(--blue)" stroke-width="4" stroke-linecap="round" />
+          </svg>
+          Lyhuoy<span>Dev</span>
+        </div>
+        <p>A passionate fourth-year Computer Science student specializing in full-stack web and cross-platform mobile
+          development. Building the next generation of digital solutions.</p>
+        <div class="footer-socials">
+          <a class="social-btn" *ngFor="let s of socials" [href]="s.url" [title]="s.label" target="_blank">
+            <img [src]="s.icon" [alt]="s.label" style="width: 20px; height: 20px; object-fit: contain;" loading="lazy">
+          </a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li *ngFor="let s of services"><a href="#">{{ s }}</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li *ngFor="let c of company">
+            <a (click)="scrollTo(c.id)">{{ c.label }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li *ngFor="let l of legal"><a href="#">{{ l }}</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {{ year }} <span>Choeun Lyhuoy</span>. All rights reserved. Built with 💙 and Angular.</p>
+      <p class="footer-version">v1.0.0 — Production</p>
+    </div>
+
+  </div>
+</footer>

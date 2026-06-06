@@ -1,0 +1,66 @@
+<section id="home" class="hero">
+  <!-- Section Specific Glows -->
+  <div class="hero-glow glow-circle glow-1 floating"></div>
+  <div class="hero-glow glow-circle glow-2 floating-slow"></div>
+
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- Left Content -->
+      <div class="hero-left">
+        <p class="hero-label">// Passionate Full Stack & Mobile Developer</p>
+        <h1 class="hero-title reveal">
+          Choeun<br>
+          <span class="highlight">Lyhuoy</span>
+        </h1>
+        <p class="hero-desc reveal">
+          I'm a 4th-year Computer Science student with a strong passion for Full Stack and Mobile development. I specialize in building robust web applications and seamless Flutter experiences using modern technologies.
+        </p>
+        <div class="hero-actions reveal">
+          <button class="btn btn-primary" (click)="scrollTo('portfolio')">View Our Work ↗</button>
+          <button class="btn btn-outline" (click)="scrollTo('contact')">Let's Talk →</button>
+        </div>
+        <div class="hero-stats reveal">
+          <div class="stat-item" *ngFor="let s of stats">
+            <div class="stat-num">{{ s.num }}</div>
+            <div class="stat-label">{{ s.label }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Visual -->
+      <div class="hero-visual" [style.transform]="'translate3d(' + parallaxOffset.x + 'px,' + parallaxOffset.y + 'px, 0)'">
+        <div class="hero-blob">
+          <div class="orbit orbit-1"></div>
+          <div class="orbit orbit-2"></div>
+          
+          <div class="icon-grid">
+            <div class="icon-card" *ngFor="let card of iconCards" [title]="card.label">
+              <img [src]="card.icon" [alt]="card.label" class="ico-img" [class.invert-me]="card.invert" loading="lazy">
+              <span class="ico-label">{{ card.label }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Redesigned Mobile Tech Stack (Fixing "Skill Simple" issue) -->
+    <div class="mobile-tech-stack-premium">
+      <p class="tech-stack-title">Expertise & Technologies</p>
+      <div class="tech-grid-mobile">
+        <div class="tech-pill" *ngFor="let card of iconCards | slice:0:10">
+          <img [src]="card.icon" [alt]="card.label" class="tech-pill-ico" [class.invert-me]="card.invert" loading="lazy">
+          <span>{{ card.label }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Down Indicator -->
+  <div class="scroll-indicator" (click)="scrollTo('portfolio')">
+    <div class="mouse">
+      <div class="wheel"></div>
+    </div>
+    <span class="scroll-text">Scroll Down</span>
+  </div>
+</section>

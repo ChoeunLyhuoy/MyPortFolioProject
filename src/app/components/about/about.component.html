@@ -1,0 +1,70 @@
+<section id="about" class="section about-section">
+  <!-- Section Glows -->
+  <div class="glow-circle about-glow floating-slow"></div>
+  
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Profile Card -->
+      <div class="about-visual reveal">
+        <div class="profile-card glass-card">
+          <div class="avatar-wrap">
+            <img src="assets/profile.jpg" alt="Choeun Lyhuoy" class="profile-img" loading="lazy">
+          </div>
+          <h3 class="about-name">Choeun Lyhuoy</h3>
+          <p class="about-role">Full Stack & Mobile Developer</p>
+          <p class="about-bio">Building modern, performant web and mobile applications with a focus on user experience and robust architecture.</p>
+          <div class="metrics-grid">
+            <div class="metric-box" *ngFor="let m of metrics">
+              <div class="metric-num">{{ m.num }}</div>
+              <div class="metric-lbl">{{ m.label }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="about-content reveal">
+        <p class="section-label">Education & Career</p>
+        <h2 class="section-title">Pursuing Bachelor's in <span>Computer Science</span></h2>
+        <p class="section-sub">Final-year student at RUPP, graduating in 2025. Focused on delivering high-quality, full-stack enterprise solutions and cross-platform mobile apps.</p>
+
+        <div class="values-list">
+          <div class="value-item reveal" style="transition-delay: 0.1s" *ngFor="let v of values">
+            <span class="value-ico glass-card">{{ v.icon }}</span>
+            <div>
+              <div class="value-title">{{ v.title }}</div>
+              <div class="value-desc">{{ v.desc }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skills-section reveal" style="transition-delay: 0.2s">
+          <div class="skill-row" *ngFor="let s of skills">
+            <div class="skill-header">
+              <span class="skill-name">{{ s.name }}</span>
+              <span class="skill-pct">{{ s.pct }}%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-fill" [style.width]="s.pct + '%'"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="cta-banner glass-card reveal">
+      <div class="cta-content">
+        <h2>Ready to Discuss Your Project?</h2>
+        <p>Book a free 30-minute strategy call to explore how we can bring your ideas to life.</p>
+      </div>
+      <div class="cta-btns">
+        <button class="btn btn-primary" (click)="scrollTo('contact')">Schedule a Call ↗</button>
+        <button class="btn btn-outline" (click)="scrollTo('portfolio')">See Our Work</button>
+      </div>
+    </div>
+
+  </div>
+</section>

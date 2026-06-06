@@ -1,0 +1,32 @@
+<section id="career" class="section career-section">
+  <div class="container">
+
+    <div class="career-header">
+      <p class="section-label" style="justify-content:center">Join Our Team</p>
+      <h2 class="section-title" style="text-align:center">Build the Future <span>with Us</span></h2>
+      <p class="section-sub" style="text-align:center;margin:0 auto;max-width:560px">
+        We're always looking for brilliant minds. Explore open positions and help us shape the next generation of intelligent technology.
+      </p>
+    </div>
+
+    <h3 class="open-title">Open Positions</h3>
+
+    <div class="jobs-grid">
+      <div class="job-card reveal" *ngFor="let job of jobs">
+        <div class="job-header">
+          <h4 class="job-title">{{ job.title }}</h4>
+          <span class="job-type">{{ job.type }}</span>
+        </div>
+        <p class="job-meta">
+          <span class="job-loc">📍 {{ job.location }}</span>
+          <span class="job-dept"> — {{ job.dept }}</span>
+        </p>
+        <div class="tags">
+          <span class="tag" *ngFor="let t of job.tags">{{ t }}</span>
+        </div>
+        <button class="apply-btn" (click)="apply(job.title)">Apply Now →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
