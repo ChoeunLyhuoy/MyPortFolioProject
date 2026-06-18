@@ -155,6 +155,123 @@
 .sent-msg { color: #fff; }
 .form-submit:has(.sent-msg) { background: #059669; }
 
+/* ── File Upload ── */
+.file-upload-wrapper {
+  position: relative;
+  width: 100%;
+}
+.file-upload-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+.file-upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: var(--bg3);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  color: var(--muted);
+  font-family: var(--font-b);
+  font-size: .9rem;
+  transition: border-color .2s, box-shadow .2s;
+  cursor: pointer;
+}
+.file-upload-input:focus + .file-upload-label,
+.file-upload-label:hover {
+  border-color: var(--cyan);
+  background: rgba(255, 255, 255, 0.05);
+}
+.file-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 12px;
+  color: var(--text);
+}
+.file-btn {
+  background: var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--title);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.file-upload-label:hover .file-btn {
+  background: var(--cyan);
+  color: #fff;
+}
+
+/* ── OTP Verification ── */
+.email-input-wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.email-input-field {
+  flex: 1;
+}
+.otp-send-btn {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-family: var(--font-b);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(37,99,235,0.25);
+  flex-shrink: 0;
+}
+.otp-send-btn:hover:not(:disabled) {
+  background: var(--cyan);
+  box-shadow: 0 4px 20px rgba(6,182,212,0.4);
+  transform: translateY(-1px);
+}
+.otp-send-btn:disabled {
+  background: var(--border);
+  color: var(--muted);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.otp-code-field {
+  font-family: monospace;
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-align: center;
+}
+.otp-info-msg {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* ── Custom Animations ── */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.slide-down {
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .contact-grid { gap: 40px; }

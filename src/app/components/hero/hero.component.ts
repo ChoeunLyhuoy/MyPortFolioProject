@@ -32,7 +32,7 @@ export class HeroComponent implements AfterViewInit {
   ];
 
   stats = [
-    { num: '4th Year', label: 'CS Student' },
+    { num: 'IT', label: 'RUPP Graduate' },
     { num: '2+', label: 'Web Apps Built' },
     { num: '3+', label: 'Years Experience' },
     { num: '10+', label: 'Tech Stack' }

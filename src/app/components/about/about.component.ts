@@ -11,23 +11,23 @@ import { CommonModule } from '@angular/common';
 })
 export class AboutComponent implements AfterViewInit {
   metrics = [
-    { num: '3+', label: 'Years of Study' },
-    { num: '2025', label: 'Ecoinsoft Exp' },
+    { num: '4', label: 'Years of Study' },
+    { num: '3', label: 'Work Roles' },
     { num: '5.0', label: 'Passion Score' },
     { num: '100%', label: 'Commitment' }
   ];
 
   values = [
-    { icon: '🚀', title: 'Full Stack Architecture', desc: 'Focusing on scalable back-end logic, dynamic front-end interfaces, and seamless data flow.' },
-    { icon: '📱', title: 'Cross-Platform Mobile', desc: 'Expertise in building high-performance iOS and Android applications using Flutter.' },
-    { icon: '🛠️', title: 'Modern Tech Stack', desc: 'Proficient in Java, Spring Boot, TypeScript, Tailwind, React, Angular, NestJS, and Flutter ecosystem.' }
+    { icon: '🚀', title: 'Backend & APIs', desc: 'Focusing on robust server-side logic, RESTful API design, and scalable system integration.' },
+    { icon: '⚡', title: 'Message Queues & Caching', desc: 'Implementing RabbitMQ for reliable message queuing and Redis for optimal caching performance.' },
+    { icon: '🛠️', title: 'Modern Stack', desc: 'Proficient in Java, Spring Boot, Grails & Groovy, TypeScript, React.js, Bootstrap, and MySQL.' }
   ];
 
   skills = [
-    { name: 'Back-end (Java/Spring/Nest/RabbitMQ)', pct: 92 },
-    { name: 'Front-end (TS/React/Angular/Tailwind)', pct: 88 },
-    { name: 'Mobile (Flutter/Swift/Firebase)', pct: 85 },
-    { name: 'Database (MySQL/Postgres/Mongo)', pct: 82 }
+    { name: 'Back-end (Java/Spring Boot/Grails/.NET)', pct: 92 },
+    { name: 'Front-end (TS/JS/React.js/Bootstrap/Angular)', pct: 88 },
+    { name: 'Mobile & OS (Flutter/Linux/Windows Server)', pct: 86 },
+    { name: 'Architecture & DB (SE/MIS/MySQL/RabbitMQ)', pct: 84 }
   ];
 
   skillsAnimated = false;

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { ChatbotService } from '../../services/chatbot.service';
+import { API_BASE_URL } from '../../config/api.config';
 
 interface ChatMessage {
   text: string;
@@ -22,6 +24,8 @@ interface ChatSuggestion {
   styleUrls: ['./chatbot.component.css']
 })
 export class ChatbotComponent implements OnInit {
+  private http = inject(HttpClient);
+
   isOpen = false;
   isMaximized = false;
   isTyping = false;
@@ -79,33 +83,7 @@ export class ChatbotComponent implements OnInit {
       return;
     }
 
-    this.isTyping = true;
-    this.suggestions = [];
-
-    setTimeout(() => {
-      this.isTyping = false;
-      
-      if (input.includes('hello') || input.includes('hi')) {
-        this.addBotMessage("Hi! 👋 Choeun's Virtual IQ is operational. I'm ready to detail his projects, technical expertise, or the innovative UI you're interacting with.");
-        this.suggestions = [...this.initialSuggestions];
-      }
-      else if (input.includes('navbar') || input.includes('sidebar') || input.includes('layout') || input.includes('navigation')) {
-        this.handleSuggestion({ text: '📱 UI/UX Layouts', action: 'layouts' });
-      }
-      else if (input.includes('workflow') || input.includes('process') || input.includes('step')) {
-        this.handleSuggestion({ text: '🏗️ Development Process', action: 'workflow' });
-      }
-      else if (input.includes('project') || input.includes('portfolio')) {
-        this.handleSuggestion({ text: '🚀 Showcase Projects', action: 'portfolio' });
-      }
-      else if (input.includes('theme') || input.includes('dark') || input.includes('light') || input.includes('style')) {
-        this.handleSuggestion({ text: '🎨 UI Styles & Layouts', action: 'layouts' });
-      }
-      else {
-        this.addBotMessage("Interesting! While I'm still evolving my natural language processing, I am an expert on Choeun's professional ecosystem. Please select a core topic:");
-        this.suggestions = [...this.initialSuggestions];
-      }
-    }, 800);
+    this.sendToBot(text);
   }
 
   clearChat() {
@@ -116,6 +94,172 @@ export class ChatbotComponent implements OnInit {
 
   handleSuggestion(suggestion: ChatSuggestion) {
     this.addUserMessage(suggestion.text);
+    
+    if (suggestion.action === 'reset') {
+      this.clearChat();
+      return;
+    }
+
+    this.sendToBot(suggestion.text, suggestion);
+  }
+
+  sendToBot(message: string, suggestionFallback?: ChatSuggestion) {
+    this.isTyping = true;
+    this.suggestions = [];
+
+    const historyPayload = this.messages.map(m => ({
+      text: m.text,
+      isUser: m.isUser
+    }));
+
+    this.http.post<any>(`${API_BASE_URL}/api/chat`, {
+      message,
+      history: historyPayload
+    }).subscribe({
+      next: (data) => {
+        this.isTyping = false;
+        
+        if (data.response) {
+          this.addBotMessage(data.response);
+        }
+        
+        if (data.action) {
+          this.executeAction(data.action);
+        }
+        
+        if (data.suggestions && data.suggestions.length > 0) {
+          this.suggestions = data.suggestions;
+        } else {
+          this.suggestions = [...this.initialSuggestions];
+        }
+      },
+      error: (err) => {
+        console.error('Chatbot API error, falling back to local handler:', err);
+        if (suggestionFallback) {
+          this.handleLocalSuggestion(suggestionFallback);
+        } else {
+          this.isTyping = false;
+          this.addBotMessage("I am experiencing connection issues. Please try again or select one of these topics:");
+          this.suggestions = [...this.initialSuggestions];
+        }
+      }
+    });
+  }
+
+  executeAction(action: string) {
+    if (!action) return;
+
+    if (action === 'portfolio') {
+      this.scrollTo('portfolio');
+    }
+    else if (action === 'workflow') {
+      this.scrollTo('services');
+    }
+    else if (action === 'contact') {
+      this.scrollTo('contact');
+    }
+    else if (action === 'about') {
+      this.scrollTo('about');
+    }
+    else if (action === 'skills_max') {
+      window.dispatchEvent(new CustomEvent('max-out-skills'));
+      this.scrollTo('skills');
+    }
+    else if (action === 'bg_aurora') {
+      document.body.classList.remove('bg-grid', 'bg-clean');
+    }
+    else if (action === 'bg_grid') {
+      document.body.classList.remove('bg-clean');
+      document.body.classList.add('bg-grid');
+    }
+    else if (action === 'bg_clean') {
+      document.body.classList.remove('bg-grid');
+      document.body.classList.add('bg-clean');
+    }
+    else if (action === 'corners_sharp') {
+      document.body.classList.remove('corners-playful');
+      document.body.classList.add('corners-sharp');
+    }
+    else if (action === 'corners_default') {
+      document.body.classList.remove('corners-sharp', 'corners-playful');
+    }
+    else if (action === 'corners_playful') {
+      document.body.classList.remove('corners-sharp');
+      document.body.classList.add('corners-playful');
+    }
+    else if (action === 'color_default') {
+      document.body.classList.remove('theme-emerald', 'theme-purple');
+    }
+    else if (action === 'color_emerald') {
+      document.body.classList.remove('theme-purple');
+      document.body.classList.add('theme-emerald');
+    }
+    else if (action === 'color_purple') {
+      document.body.classList.remove('theme-emerald');
+      document.body.classList.add('theme-purple');
+    }
+    else if (action === 'layout_nav') {
+      window.dispatchEvent(new CustomEvent('layout-toggle', { detail: { layout: 'navbar' } }));
+      this.scrollTo('home');
+    }
+    else if (action === 'layout_rail') {
+      window.dispatchEvent(new CustomEvent('layout-toggle', { detail: { layout: 'sidebar' } }));
+    }
+    else if (action === 'trigger_light') {
+      window.dispatchEvent(new CustomEvent('theme-toggle', { detail: { isDark: false } }));
+      localStorage.setItem('theme', 'light');
+    }
+    else if (action === 'trigger_dark') {
+      window.dispatchEvent(new CustomEvent('theme-toggle', { detail: { isDark: true } }));
+      localStorage.setItem('theme', 'dark');
+    }
+    else if (action === 'layout_port_grid') {
+      window.dispatchEvent(new CustomEvent('portfolio-layout-toggle', { detail: { mode: 'grid' } }));
+      this.scrollTo('portfolio');
+    }
+    else if (action === 'layout_port_list') {
+      window.dispatchEvent(new CustomEvent('portfolio-layout-toggle', { detail: { mode: 'list' } }));
+      this.scrollTo('portfolio');
+    }
+    else if (action === 'card_glass') {
+      window.dispatchEvent(new CustomEvent('portfolio-style-toggle', { detail: { cardStyle: 'glass' } }));
+      this.scrollTo('portfolio');
+    }
+    else if (action === 'card_minimal') {
+      window.dispatchEvent(new CustomEvent('portfolio-style-toggle', { detail: { cardStyle: 'minimal' } }));
+      this.scrollTo('portfolio');
+    }
+    else if (action === 'card_glow') {
+      window.dispatchEvent(new CustomEvent('portfolio-style-toggle', { detail: { cardStyle: 'glow' } }));
+      this.scrollTo('portfolio');
+    }
+    else if (action === 'card_holo') {
+      window.dispatchEvent(new CustomEvent('portfolio-style-toggle', { detail: { cardStyle: 'holo' } }));
+      this.scrollTo('portfolio');
+    }
+    else if (action === 'card_cyber') {
+      window.dispatchEvent(new CustomEvent('portfolio-style-toggle', { detail: { cardStyle: 'cyber' } }));
+      this.scrollTo('portfolio');
+    }
+    else if (action === 'img_normal') {
+      window.dispatchEvent(new CustomEvent('portfolio-style-toggle', { detail: { imageFilter: 'normal' } }));
+      this.scrollTo('portfolio');
+    }
+    else if (action === 'img_gray') {
+      window.dispatchEvent(new CustomEvent('portfolio-style-toggle', { detail: { imageFilter: 'grayscale' } }));
+      this.scrollTo('portfolio');
+    }
+    else if (action === 'download_cv') {
+      const link = document.createElement('a');
+      link.href = 'assets/Choeun_Lyhuoy_CV.pdf';
+      link.download = 'Choeun_Lyhuoy_CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
+
+  private handleLocalSuggestion(suggestion: ChatSuggestion) {
     this.isTyping = true;
     this.suggestions = []; 
     

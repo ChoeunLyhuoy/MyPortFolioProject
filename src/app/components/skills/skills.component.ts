@@ -47,15 +47,11 @@ export class SkillsComponent implements OnInit {
         ],
         [
           { id: 'ts', name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg', status: 'mastered', level: 5, maxLevel: 5, cost: 80, desc: 'Strict typing, interfaces, and scalable JS development.' },
-          { id: 'tailwind', name: 'Tailwind', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg', status: 'mastered', level: 5, maxLevel: 5, cost: 70, desc: 'Utility-first CSS and rapid UI development.' }
+          { id: 'bootstrap', name: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg', status: 'mastered', level: 5, maxLevel: 5, cost: 70, desc: 'Responsive CSS layout, grid systems, and component libraries.' }
         ],
         [
           { id: 'angular', name: 'Angular', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 120, desc: 'Component architecture, RxJS, and state management.' },
-          { id: 'react', name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg', status: 'unlocked', level: 3, maxLevel: 5, cost: 100, desc: 'Hooks, Context API, and functional component design.' }
-        ],
-        [
-          { id: 'threejs', name: 'Three.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threejs/threejs-original.svg', status: 'unlocked', level: 2, maxLevel: 5, cost: 150, desc: '3D rendering, scene graphs, and web-based AR/VR.' },
-          { id: 'vue', name: 'Vue.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg', status: 'locked', level: 0, maxLevel: 5, cost: 200, desc: 'Progressive framework and composition API.' }
+          { id: 'react', name: 'React.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 100, desc: 'Hooks, Redux, React Router, and functional component design.' }
         ]
       ]
     },
@@ -66,40 +62,37 @@ export class SkillsComponent implements OnInit {
       nodes: [
         [
           { id: 'java', name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg', status: 'mastered', level: 5, maxLevel: 5, cost: 100, desc: 'Object-oriented programming, JVM, and enterprise applications.' },
-          { id: 'node', name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg', status: 'mastered', level: 5, maxLevel: 5, cost: 80, desc: 'Event-driven architecture and high-performance APIs.' }
+          { id: 'groovy', name: 'Grails & Groovy', icon: 'assets/groovy.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 120, desc: 'Rapid web application development with Groovy and Grails framework.' }
         ],
         [
           { id: 'spring', name: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 130, desc: 'Enterprise microservices, dependency injection, and JPA.' },
-          { id: 'sql', name: 'Databases', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 90, desc: 'PostgreSQL, MongoDB, indexing, and query optimization.' }
+          { id: 'mysql', name: 'MySQL Database', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 90, desc: 'Relational database management, SQL tuning, and database optimization.' }
         ],
         [
-          { id: 'nest', name: 'NestJS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg', status: 'unlocked', level: 3, maxLevel: 5, cost: 120, desc: 'Enterprise microservices and scalable modular backend design.' },
-          { id: 'docker', name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg', status: 'unlocked', level: 2, maxLevel: 5, cost: 150, desc: 'Containerization, volumes, and robust environment setups.' }
+          { id: 'rabbitmq', name: 'RabbitMQ', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rabbitmq/rabbitmq-original.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 140, desc: 'Message queuing, exchanges, routing, and distributed systems.' },
+          { id: 'redis', name: 'Redis Caching', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg', status: 'unlocked', level: 3, maxLevel: 5, cost: 110, desc: 'In-memory caching and session store for performance optimization.' }
         ],
         [
-          { id: 'mysql', name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg', status: 'unlocked', level: 4, maxLevel: 5, cost: 90, desc: 'Relational database management and performance tuning.' },
-          { id: 'rabbitmq', name: 'RabbitMQ', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rabbitmq/rabbitmq-original.svg', status: 'unlocked', level: 3, maxLevel: 5, cost: 140, desc: 'Message queuing, exchanges, and distributed systems.' }
-        ],
-        [
-          { id: 'k8s', name: 'Kubernetes', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg', status: 'locked', level: 0, maxLevel: 5, cost: 250, desc: 'Cluster orchestration, auto-scaling, and load balancing.' }
+          { id: 'dotnet', name: '.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dot-net/dot-net-original.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 120, desc: 'Enterprise application development using C# and the .NET framework.' }
         ]
       ]
     },
     {
-      title: 'Mobile & Tools',
+      title: 'Systems, Mobile & Management',
       color: 'var(--indigo)',
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apple/apple-original.svg',
       nodes: [
         [
-          { id: 'git', name: 'Git/CI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg', status: 'mastered', level: 5, maxLevel: 5, cost: 40, desc: 'Advanced version control, rebase, and GitHub Actions pipelines.' },
-          { id: 'firebase', name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 100, desc: 'Auth, Firestore, Cloud Functions, and Realtime Database.' }
+          { id: 'git', name: 'Git & Version Control', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg', status: 'mastered', level: 5, maxLevel: 5, cost: 40, desc: 'Version control workflows using GitHub, GitLab, and Gitea.' },
+          { id: 'flutter', name: 'Flutter Mobile', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 120, desc: 'Cross-platform mobile application development for iOS and Android.' }
         ],
         [
-          { id: 'flutter', name: 'Flutter', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg', status: 'unlocked', level: 3, maxLevel: 5, cost: 120, desc: 'Cross-platform mobile apps, state management, and native bridging.' },
-          { id: 'android', name: 'Android', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg', status: 'locked', level: 0, maxLevel: 5, cost: 180, desc: 'Native bridging, Expo, and fast-refresh mobile UI.' }
+          { id: 'sysadmin', name: 'Linux & Windows Server', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 100, desc: 'Server administration, Linux command line, SSH, and Windows Server management.' },
+          { id: 'xshell', name: 'XShell & SSH Tools', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg', status: 'mastered', level: 3, maxLevel: 5, cost: 90, desc: 'Remote server administration, terminal management, and SSH setups.' }
         ],
         [
-          { id: 'swift', name: 'iOS (Swift)', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg', status: 'locked', level: 0, maxLevel: 5, cost: 200, desc: 'Native iOS development with Swift and SwiftUI.' }
+          { id: 'se_mis', name: 'SE & MIS Concepts', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/diagramsnet/diagramsnet-original.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 90, desc: 'Software Engineering methodologies, systems analysis, and Management Information Systems.' },
+          { id: 'pm', name: 'Project Management', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/trello/trello-original.svg', status: 'mastered', level: 4, maxLevel: 5, cost: 80, desc: 'Agile planning and task tracking using Trello and ClickUp.' }
         ]
       ]
     }

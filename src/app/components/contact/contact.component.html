@@ -44,7 +44,20 @@
 
         <div class="form-group">
           <label class="form-label">Email Address</label>
-          <input class="form-input" type="email" placeholder="alex@company.com" [(ngModel)]="form.email" name="email" />
+          <div class="email-input-wrapper">
+            <input class="form-input email-input-field" type="email" placeholder="alex@company.com" [(ngModel)]="form.email" name="email" [disabled]="otpSent" />
+            <button class="otp-send-btn" (click)="sendOtp()" [disabled]="sendingOtp || otpSent || !form.email">
+              <span *ngIf="!sendingOtp && !otpSent">Send Code</span>
+              <span *ngIf="sendingOtp">Sending…</span>
+              <span *ngIf="otpSent">Sent ✓</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group slide-down" *ngIf="otpSent">
+          <label class="form-label">Verification OTP Code</label>
+          <input class="form-input otp-code-field" type="text" placeholder="Enter 6-digit OTP code" [(ngModel)]="otpCode" name="otpCode" maxlength="6" />
+          <p class="otp-info-msg">A 6-digit verification code has been sent to your email.</p>
         </div>
 
         <div class="form-group">
@@ -56,11 +69,22 @@
         </div>
 
         <div class="form-group">
+          <label class="form-label">Attach Project Brief / CV (Optional)</label>
+          <div class="file-upload-wrapper">
+            <input class="file-upload-input" type="file" id="contactFile" (change)="onFileChange($event)" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip" />
+            <label for="contactFile" class="file-upload-label">
+              <span class="file-name">{{ selectedFileName || 'Choose file (PDF, DOCX, JPG, PNG, ZIP)...' }}</span>
+              <span class="file-btn">Browse</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="form-label">Message</label>
           <textarea class="form-textarea" placeholder="Tell us about your project…" [(ngModel)]="form.message" name="message"></textarea>
         </div>
 
-        <button class="form-submit btn btn-primary" (click)="submit()" [disabled]="sending || sent">
+        <button class="form-submit btn btn-primary" (click)="submit()" [disabled]="sending || sent || !otpSent || !otpCode || otpCode.length !== 6">
           <span *ngIf="!sending && !sent">Send Message →</span>
           <span *ngIf="sending">Sending…</span>
           <span *ngIf="sent" class="sent-msg">✓ Message Sent!</span>
