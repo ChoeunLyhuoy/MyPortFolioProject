@@ -75,9 +75,13 @@ export class ContactComponent implements AfterViewInit {
     this.sendingOtp = true;
 
     this.http.post<any>(`${API_BASE_URL}/api/contact/send-otp`, { email: this.form.email }).subscribe({
-      next: () => {
+      next: (res) => {
         this.sendingOtp = false;
         this.otpSent = true;
+        if (res.debugOtp) {
+          alert(`[Local Testing Mode] Verification code is: ${res.debugOtp} (Automatically filled)`);
+          this.otpCode = res.debugOtp;
+        }
       },
       error: (err) => {
         this.sendingOtp = false;
