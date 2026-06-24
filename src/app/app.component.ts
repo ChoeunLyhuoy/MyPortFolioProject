@@ -93,25 +93,52 @@ export class AppComponent implements AfterViewInit {
     this.isMobile = isSmall || isTouch;
   }
 
+  private dotEl: HTMLElement | null = null;
+  private outlineEl: HTMLElement | null = null;
+  private mouseX = 0;
+  private mouseY = 0;
+  private isMoving = false;
+
+  private updateCursor(): void {
+    if (!this.dotEl) this.dotEl = document.querySelector('.cursor-dot');
+    if (!this.outlineEl) this.outlineEl = document.querySelector('.cursor-outline');
+
+    if (this.dotEl && this.outlineEl) {
+      this.dotEl.style.left = this.mouseX + 'px';
+      this.dotEl.style.top = this.mouseY + 'px';
+      this.outlineEl.style.left = this.mouseX + 'px';
+      this.outlineEl.style.top = this.mouseY + 'px';
+    }
+    this.isMoving = false;
+  }
+
   @HostListener('mousemove', ['$event'])
   onMouseMove(e: MouseEvent): void {
     if (!this.isBrowser || this.isMobile) return;
 
-    const dot = document.querySelector('.cursor-dot') as HTMLElement;
-    const outline = document.querySelector('.cursor-outline') as HTMLElement;
+    this.mouseX = e.clientX;
+    this.mouseY = e.clientY;
 
-    if (dot && outline) {
-      dot.style.left = e.clientX + 'px';
-      dot.style.top = e.clientY + 'px';
-      outline.style.left = e.clientX + 'px';
-      outline.style.top = e.clientY + 'px';
+    if (!this.isMoving) {
+      this.isMoving = true;
+      requestAnimationFrame(() => this.updateCursor());
     }
+  }
 
+  @HostListener('mouseover', ['$event'])
+  onMouseOver(e: MouseEvent): void {
+    if (!this.isBrowser || this.isMobile) return;
     const target = e.target as HTMLElement;
-    const isHoverable = target.closest('a, button, .btn, .icon-btn, .nav-logo, .portfolio-card, .tab-btn, .icon-card, .scroll-indicator');
-    if (isHoverable) {
+    if (target && target.closest('a, button, .btn, .icon-btn, .nav-logo, .portfolio-card, .tab-btn, .icon-card, .scroll-indicator')) {
       document.body.classList.add('cursor-hover');
-    } else {
+    }
+  }
+
+  @HostListener('mouseout', ['$event'])
+  onMouseOut(e: MouseEvent): void {
+    if (!this.isBrowser || this.isMobile) return;
+    const target = e.target as HTMLElement;
+    if (target && target.closest('a, button, .btn, .icon-btn, .nav-logo, .portfolio-card, .tab-btn, .icon-card, .scroll-indicator')) {
       document.body.classList.remove('cursor-hover');
     }
   }

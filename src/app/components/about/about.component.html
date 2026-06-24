@@ -14,7 +14,12 @@
           <h3 class="about-name">Choeun Lyhuoy</h3>
           <p class="about-role">Full-Stack Developer</p>
           <p class="about-bio">I'm an Information Technology graduate from the Royal University of Phnom Penh (RUPP) with a strong passion for both front-end and back-end development. I've built two web applications using ReactJS, where I've honed my skills in responsive design, Redux, React Router, and API integration. While I haven't yet worked professionally as a front-end developer, I'm eager to bring my skills to a real-world environment. Additionally, I'm deepening my expertise in back-end development to become a versatile full-stack developer.</p>
-          <a class="about-cv-btn" href="assets/Choeun_Lyhuoy_CV.pdf" target="_blank" download="Choeun_Lyhuoy_CV.pdf">Save CV 📥</a>
+          <a class="about-cv-btn" 
+             href="assets/Choeun_Lyhuoy_CV.pdf" 
+             [target]="isMobile ? '_blank' : '_self'" 
+             [attr.download]="isMobile ? null : 'Choeun_Lyhuoy_CV.pdf'">
+            Save CV 📥
+          </a>
           <div class="metrics-grid">
             <div class="metric-box" *ngFor="let m of metrics">
               <div class="metric-num">{{ m.num }}</div>

@@ -10,6 +10,15 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutComponent implements AfterViewInit {
+  isMobile = false;
+
+  constructor() {
+    if (typeof window !== 'undefined') {
+      const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+      const isSmall = window.innerWidth <= 1024;
+      this.isMobile = isSmall || isTouch;
+    }
+  }
   metrics = [
     { num: '4', label: 'Years of Study' },
     { num: '3', label: 'Work Roles' },

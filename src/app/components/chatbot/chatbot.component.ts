@@ -93,6 +93,13 @@ export class ChatbotComponent implements OnInit {
   }
 
   handleSuggestion(suggestion: ChatSuggestion) {
+    if (suggestion.action === 'open_cv_file') {
+      this.addUserMessage(suggestion.text);
+      window.open('assets/Choeun_Lyhuoy_CV.pdf', '_blank');
+      this.suggestions = [...this.initialSuggestions];
+      return;
+    }
+
     this.addUserMessage(suggestion.text);
     
     if (suggestion.action === 'reset') {
@@ -250,12 +257,26 @@ export class ChatbotComponent implements OnInit {
       this.scrollTo('portfolio');
     }
     else if (action === 'download_cv') {
-      const link = document.createElement('a');
-      link.href = 'assets/Choeun_Lyhuoy_CV.pdf';
-      link.download = 'Choeun_Lyhuoy_CV.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (window.innerWidth <= 1024);
+      if (isMobile) {
+        this.addBotMessage("Since you are on a mobile device, if the download did not start automatically, please tap the **📥 Open/Save CV** button below to view it.");
+        this.suggestions = [
+          { text: '📥 Open/Save CV', action: 'open_cv_file' },
+          ...this.initialSuggestions
+        ];
+        try {
+          window.open('assets/Choeun_Lyhuoy_CV.pdf', '_blank');
+        } catch (e) {
+          console.warn("Direct window.open blocked on mobile, relying on suggestion chip.");
+        }
+      } else {
+        const link = document.createElement('a');
+        link.href = 'assets/Choeun_Lyhuoy_CV.pdf';
+        link.download = 'Choeun_Lyhuoy_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
     }
   }
 
@@ -617,13 +638,31 @@ export class ChatbotComponent implements OnInit {
     this.suggestions = [{ text: '🏗️ How I build them?', action: 'workflow' }, { text: '🏠 Home', action: 'reset' }];
   }
 
+  private parseMarkdown(text: string): string {
+    if (!text) return '';
+    let escaped = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+    
+    let html = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="chat-link" target="_blank" style="color: var(--cyan); text-decoration: underline; font-weight: 600;">$1</a>');
+    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    html = html.replace(/\n/g, '<br>');
+    return html;
+  }
+
   private addBotMessage(text: string) {
-    this.messages.push({ text, isUser: false, timestamp: new Date() });
+    const formattedText = this.parseMarkdown(text);
+    this.messages.push({ text: formattedText, isUser: false, timestamp: new Date() });
     this.scrollToBottom();
   }
 
   private addUserMessage(text: string) {
-    this.messages.push({ text, isUser: true, timestamp: new Date() });
+    const formattedText = this.parseMarkdown(text);
+    this.messages.push({ text: formattedText, isUser: true, timestamp: new Date() });
     this.scrollToBottom();
   }
 
